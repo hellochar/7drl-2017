@@ -3,7 +3,7 @@
     "declaration": false,
     "experimentalDecorators": true,
     "jsx": "react",
-    "outDir": "build",
+    "outDir": "build/src",
     "lib": [
       "dom",
       "es2015.core",
