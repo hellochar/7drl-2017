@@ -7,7 +7,7 @@ export class EnergyComponent extends React.Component<{ energy: Energy }, {}> {
         const energy = this.props.energy;
         return (
             <div className={"energy energy-" + energy.flavor}>
-                {energy.intensity}
+                {energy.intensity.toFixed(0)}
             </div>
         );
     }
@@ -44,6 +44,11 @@ export class OperatorComponent extends React.Component<{ operator: Operator }, {
                 <div className="operator-display">
                     <div className="operator-display-energy">
                         <EnergyComponent energy={this.props.operator.eval()} />
+                    </div>
+                    <div className="operator-display-operation">
+                        <div className="operator-display-operation-text">
+                            {this.props.operator.getOperation()}
+                        </div>
                     </div>
                     <div className="operator-display-sockets">
                         { this.renderSockets() }

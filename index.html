@@ -32,24 +32,46 @@
 }
 
 .operator {
+    font-family: Courier New, Courier, monospace;
     display: inline-block;
 }
 
 .operator-display {
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 .operator-display-energy {
-    margin: auto;
     padding-bottom: 25px;
     position: relative;
 }
 
+.operator-display-operation {
+    position: relative;
+    height: 0;
+    top: -12.5px;
+    left: 12.5px;
+    overflow: visible;
+    font-size: 0.5em;
+    z-index: 1;
+}
+
+.operator-display-operation-text {
+    display: inline-block;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 3px;
+    border: 1px solid grey;
+}
+
+/*
+Vertical line top half
+*/
 .operator-display-energy::after {
     content: "";
     position: absolute;
-    left: 50%;
+    left: 12.5px;
     width: 1px;
     border-left: 1px solid grey;
     height: 12.5px;
@@ -62,27 +84,34 @@
     position: relative;
 }
 
-.operator-display-sockets::before {
-    content: "";
-    border-bottom: 1px solid grey;
-    left: 12.5px;
-    right: 12.5px;
-    position: absolute;
-    top: -12.5px;
-}
-
 .socket {
     position: relative;
 }
 
+/*
+Vertical line above the socket
+*/
 .operator-display-sockets > .socket::before {
     content: "";
     border-left: 1px solid grey;
     height: 12.5px;
     width: 1px;
     position: absolute;
-    left: 50%;
+    left: 12.5px;
     bottom: 100%;
+}
+
+/*
+Horizontal line above the socket to the left edge
+*/
+.operator-display-sockets > .socket + .socket::after {
+    content: "";
+    position: absolute;
+    top: -12.5px;
+    height: 100%;
+    left: calc(-25px + -12.5px);
+    border-top: 1px solid grey;
+    right: calc(100% - 12.5px);
 }
     </style>
     <body>

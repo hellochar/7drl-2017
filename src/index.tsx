@@ -12,7 +12,10 @@ const i2 = new Intensifier(0.9);
 i2.sockets[0] = i1;
 const a = new Adder();
 a.sockets[0] = i2;
-a.sockets[1] = new CrystalShard(1, "blue");
+const subAdder = new Adder();
+subAdder.sockets[0] = new CrystalShard(4, "green");
+subAdder.sockets[1] = new CrystalShard(2, "blue");
+a.sockets[1] = subAdder;
 
 ReactDOM.render(
     a.render(),

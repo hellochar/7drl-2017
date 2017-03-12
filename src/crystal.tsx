@@ -54,6 +54,8 @@ export abstract class Operator implements Crystal, Socketable {
         return <OperatorComponent operator={this} />;
     }
 
+    abstract getOperation(): string;
+
     abstract eval(): Energy;
 }
 
@@ -61,6 +63,10 @@ export class Intensifier extends Operator {
     sockets: Socket[] = [undefined];
     public constructor(private factor: number) {
         super();
+    }
+
+    public getOperation() {
+        return `x${this.factor}`;
     }
 
     public eval() {
@@ -83,6 +89,10 @@ export class Adder extends Operator {
     sockets: Socket[] = [undefined, undefined];
     public constructor() {
         super();
+    }
+
+    public getOperation() {
+        return `+`;
     }
 
     public eval() {
