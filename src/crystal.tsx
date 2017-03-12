@@ -4,6 +4,19 @@ import { OperatorComponent, CrystalShardComponent } from "./components";
 
 export type Flavor = "red" | "green" | "blue";
 
+export function strongerOf(f1: Flavor, f2: Flavor) {
+    if (f1 === f2) {
+        return f1;
+    } else if (
+        f1 === "red" && f2 === "green" ||
+        f1 === "green" && f2 === "blue" ||
+        f1 === "blue" && f2 === "red") {
+        return f1;
+    } else {
+        return f2;
+    }
+}
+
 export interface Energy {
     intensity: number;
     flavor: Flavor;
@@ -63,5 +76,19 @@ export class Intensifier extends Operator {
                 flavor: energy.flavor
             };
         }
+    }
+}
+
+export class Adder extends Operator {
+    sockets: Socket[] = [undefined, undefined];
+    public constructor() {
+        super();
+    }
+
+    public eval() {
+        return {
+            intensity: this.sockets[0].eval().intensity + this.sockets[1].eval().intensity,
+            flavor: strongerOf(this.sockets[0].eval().flavor, this.sockets[1].eval().flavor),
+        };
     }
 }

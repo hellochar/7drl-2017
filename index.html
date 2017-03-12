@@ -2,24 +2,87 @@
     <head>
     </head>
     <style>
+* {
+    box-sizing: border-box;
+
+}
 .energy {
     width: 25px;
     height: 25px;
     border: 1px solid grey;
-    border-radius: 2px;
+    border-radius: 25px;
     text-align: center;
+    line-height: 25px;
 }
 
 .energy-red {
-    background-color: red;
+    background-color: rgb(255, 128, 128);
 }
 
 .energy-green {
-    background-color: green;
+    background-color: rgb(128, 255, 128);
 }
 
 .energy-blue {
-    background-color: blue;
+    background-color: rgb(128, 128, 255);
+}
+
+.socket + .socket {
+    margin-left: 25px;
+}
+
+.operator {
+    display: inline-block;
+}
+
+.operator-display {
+    display: flex;
+    flex-direction: column;
+}
+
+.operator-display-energy {
+    margin: auto;
+    padding-bottom: 25px;
+    position: relative;
+}
+
+.operator-display-energy::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    width: 1px;
+    border-left: 1px solid grey;
+    height: 12.5px;
+}
+
+.operator-display-sockets {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    position: relative;
+}
+
+.operator-display-sockets::before {
+    content: "";
+    border-bottom: 1px solid grey;
+    left: 12.5px;
+    right: 12.5px;
+    position: absolute;
+    top: -12.5px;
+}
+
+.socket {
+    position: relative;
+}
+
+.operator-display-sockets > .socket::before {
+    content: "";
+    border-left: 1px solid grey;
+    height: 12.5px;
+    width: 1px;
+    position: absolute;
+    left: 50%;
+    bottom: 100%;
 }
     </style>
     <body>

@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Crystal, Socketable, Operator, Energy, CrystalShard, Socket } from "./crystal";
+import { Operator, Energy, CrystalShard, Socket } from "./crystal";
 
 export class EnergyComponent extends React.Component<{ energy: Energy }, {}> {
     public render() {
@@ -37,28 +37,26 @@ export class SocketComponent extends React.Component<{ socket: Socket }, {}> {
     }
 }
 
-export class SocketableComponent extends React.Component<{ socketable: Socketable }, {}> {
-    public render() {
-        return (
-            <div className="socketable">
-                {
-                    this.props.socketable.sockets.map((socket, index) => {
-                        return <SocketComponent key={index} socket={socket} />;
-                    })
-                }
-            </div>
-        )
-    }
-}
-
 export class OperatorComponent extends React.Component<{ operator: Operator }, {}> {
     public render() {
         return (
             <div className="operator">
-                <EnergyComponent energy={this.props.operator.eval()} />
-                <SocketableComponent socketable={this.props.operator} />
+                <div className="operator-display">
+                    <div className="operator-display-energy">
+                        <EnergyComponent energy={this.props.operator.eval()} />
+                    </div>
+                    <div className="operator-display-sockets">
+                        { this.renderSockets() }
+                    </div>
+                </div>
             </div>
         )
+    }
+
+    private renderSockets() {
+        return this.props.operator.sockets.map((socket, index) => {
+            return <SocketComponent key={index} socket={socket} />;
+        });
     }
 }
 
