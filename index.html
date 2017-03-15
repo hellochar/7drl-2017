@@ -27,6 +27,17 @@
     background-color: rgb(128, 128, 255);
 }
 
+.socket {
+    position: relative;
+}
+
+.socket.socket-empty {
+    width: 25px;
+    height: 25px;
+    border: 1px solid grey;
+    border-radius: 25px;
+}
+
 .socket + .socket {
     margin-left: 25px;
 }
@@ -34,6 +45,10 @@
 .operator {
     font-family: Courier New, Courier, monospace;
     display: inline-block;
+}
+
+.operator:hover {
+    background-color: rgba(0, 0, 0, 0.25);
 }
 
 .operator-display {
@@ -53,7 +68,7 @@
     top: -12.5px;
     left: 12.5px;
     overflow: visible;
-    font-size: 0.5em;
+    font-size: 0.8em;
     z-index: 1;
 }
 
@@ -84,10 +99,6 @@ Vertical line top half
     position: relative;
 }
 
-.socket {
-    position: relative;
-}
-
 /*
 Vertical line above the socket
 */
@@ -113,6 +124,72 @@ Horizontal line above the socket to the left edge
     border-top: 1px solid grey;
     right: calc(100% - 12.5px);
 }
+
+.wizard {
+    display: inline-block;
+}
+
+.wizard-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.wizard-image {
+    margin: auto;
+    font-size: 200px;
+}
+
+.wizard-status {
+    padding-bottom: 10px;
+}
+
+.wizard-hp {
+    width: 100%;
+    height: 20px;
+    display: flex;
+    border: 2px solid black;
+}
+
+.wizard-hp-part {
+    height: 100%;
+    text-align: center;
+}
+
+.wizard-hp-red {
+    background-color: rgb(255, 128, 128);
+}
+
+.wizard-hp-green {
+    background-color: rgb(128, 255, 128);
+}
+
+.wizard-hp-blue {
+    background-color: rgb(128, 128, 255);
+}
+
+.wizard-equipments {
+    display: flex;
+    flex-direction: row;
+}
+
+.wizard-equipment {
+    border: 5px outset lightgray;
+    background: #eee;
+}
+
+.wizard-shield {
+    margin-left: 5px;
+}
+
+.wizard-weapon-name, .wizard-shield-name {
+    text-align: center;
+}
+
+.equipment {
+    display: flex;
+    flex-direction: row;
+}
+
     </style>
     <body>
         <script src="app.js"></script>

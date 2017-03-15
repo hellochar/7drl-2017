@@ -96,9 +96,11 @@ export class Adder extends Operator {
     }
 
     public eval() {
+        const s0 = ((this.sockets[0] && this.sockets[0].eval()) || { intensity: 0, flavor: "red" });
+        const s1 = ((this.sockets[1] && this.sockets[1].eval()) || { intensity: 0, flavor: "red" });
         return {
-            intensity: this.sockets[0].eval().intensity + this.sockets[1].eval().intensity,
-            flavor: strongerOf(this.sockets[0].eval().flavor, this.sockets[1].eval().flavor),
+            intensity: s0.intensity + s1.intensity,
+            flavor: strongerOf(s0.flavor, s1.flavor),
         };
     }
 }
