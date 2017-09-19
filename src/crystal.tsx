@@ -1,6 +1,11 @@
 import * as React from "react";
 
 import { OperatorComponent, CrystalShardComponent } from "./components";
+import { DragSource } from "react-dnd";
+
+const DRAG_TYPES = {
+    crystal: "crystal"
+};
 
 export type Flavor = "red" | "green" | "blue";
 

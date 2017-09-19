@@ -1,6 +1,7 @@
 import * as React from "react";
+import { DragSource, DragSourceSpec, Identifier, DragSourceMonitor, DragSourceCollector, DragSourceConnector, ConnectDragSource } from "react-dnd";
 
-import { Operator, Energy, CrystalShard, Socket } from "./crystal";
+import { Operator, Energy, CrystalShard, Socket, Crystal } from "./crystal";
 import { Equipment, Wizard, MultiEnergy } from "./wizard";
 
 export class EnergyComponent extends React.Component<{ energy: Energy }, {}> {
@@ -20,7 +21,49 @@ export class CrystalShardComponent extends React.Component<{ shard: CrystalShard
     }
 }
 
-export class SocketComponent extends React.Component<{ socket: Socket }, {}> {
+const DRAG_TYPES = {
+    socket: "socket"
+};
+
+interface SocketDragItem {
+    socket: Socket;   
+}
+
+const SocketDragSource: DragSourceSpec<SocketComponentProps> = {
+    beginDrag: (props: SocketComponentProps) => {
+        const item: SocketDragItem = {
+            socket: props.socket
+        };
+        return item;
+    },
+
+    endDrag: (props: SocketComponentProps, monitor: DragSourceMonitor) => {
+        if (monitor.didDrop()) {
+            const item = monitor.getItem() as SocketDragItem;
+            const { socket } = item;
+            monitor.getDropResult()
+        }
+    }
+};
+
+interface SocketDragSourceInjectedProps {
+    connectDragSource: ConnectDragSource;
+    isDragging: boolean;
+}
+
+const SocketDragSourceCollector: DragSourceCollector = (connect: DragSourceConnector, monitor: DragSourceMonitor) => {
+    const injectedProps: SocketDragSourceInjectedProps = {
+        connectDragSource: connect.dragSource(),
+        isDragging: monitor.isDragging()
+    };
+    return injectedProps;
+};
+
+export interface SocketComponentProps extends SocketDragSourceInjectedProps {
+    socket: Socket;
+}
+
+class UninjectedSocketComponent extends React.Component<SocketComponentProps, {}> {
     public render() {
         const className = "socket" + ((this.props.socket == null) ? " socket-empty" : "");
         return (
@@ -34,10 +77,12 @@ export class SocketComponent extends React.Component<{ socket: Socket }, {}> {
         if (this.props.socket == null) {
             return null;
         } else {
-            return this.props.socket.render();
+            return this.props.connectDragSource(this.props.socket.render());
         }
     }
 }
+
+export const SocketComponent = DragSource(DRAG_TYPES.socket, SocketDragSource, SocketDragSourceCollector)(UninjectedSocketComponent);
 
 export class OperatorComponent extends React.Component<{ operator: Operator }, {}> {
     public render() {

@@ -15,6 +15,8 @@
   "license": "MIT",
   "dependencies": {
     "react": "^15.4.2",
+    "react-dnd": "^2.2.4",
+    "react-dnd-html5-backend": "^2.2.4",
     "react-dom": "^15.4.2",
     "typescript": "^2.2.1",
     "webpack": "^2.2.1",
@@ -22,6 +24,8 @@
   },
   "devDependencies": {
     "@types/react": "^15.0.16",
+    "@types/react-dnd": "^2.0.32",
+    "@types/react-dnd-html5-backend": "^2.1.7",
     "@types/react-dom": "^0.14.23",
     "npm-run-all": "^4.0.2"
   }
